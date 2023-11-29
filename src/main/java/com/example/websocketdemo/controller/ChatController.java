@@ -37,8 +37,8 @@ public class ChatController {
         String username = chatRoomRepository.addUser(chatMessage.getRoomId(), chatMessage.getSender());
 
         // 반환 결과를 socket session 에 userUUID 로 저장
-        headerAccessor.getSessionAttributes().put("userUUID", userUUID);
-        headerAccessor.getSessionAttributes().put("roomId", chat.getRoomId());
+        headerAccessor.getSessionAttributes().put("username", username);
+        headerAccessor.getSessionAttributes().put("roomId", chatMessage.getRoomId());
 
         return chatMessage;
     }
