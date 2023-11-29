@@ -1,6 +1,7 @@
 package com.example.websocketdemo.controller;
 
 import com.example.websocketdemo.model.ChatMessage;
+import com.example.websocketdemo.repository.ChatRoomRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,9 @@ public class WebSocketEventListener {
     @Autowired
     private SimpMessageSendingOperations messagingTemplate;
 
+    @Autowired
+    private ChatRoomRepository chatRoomRepository;
+
     @EventListener
     public void handleWebSocketConnectListener(SessionConnectedEvent event) {
         logger.info("Received a new web socket connection");
@@ -32,14 +36,18 @@ public class WebSocketEventListener {
         StompHeaderAccessor headerAccessor = StompHeaderAccessor.wrap(event.getMessage());
 
         String username = (String) headerAccessor.getSessionAttributes().get("username");
-        if(username != null) {
+        String roomId = (String) headerAccessor.getSessionAttributes().get("roomId");
+
+        if(username != null && roomId != null) {
             logger.info("User Disconnected : " + username);
 
             ChatMessage chatMessage = new ChatMessage();
             chatMessage.setType(ChatMessage.MessageType.LEAVE);
             chatMessage.setSender(username);
 
-            messagingTemplate.convertAndSend("/topic/public", chatMessage);
+            chatRoomRepository.deleteUser(username, roomId);
+
+            messagingTemplate.convertAndSend("/topic/room/"+roomId, chatMessage);
         }
     }
 }
