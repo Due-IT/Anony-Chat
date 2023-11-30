@@ -1,5 +1,6 @@
 'use strict';
 
+var chatroomPage = document.querySelector('#chatroom-page');
 var usernamePage = document.querySelector('#username-page');
 var chatPage = document.querySelector('#chat-page');
 var usernameForm = document.querySelector('#usernameForm');
@@ -15,6 +16,13 @@ var colors = [
     '#2196F3', '#32c787', '#00BCD4', '#ff5652',
     '#ffc107', '#ff85af', '#FF9800', '#39bbb0'
 ];
+
+function getChatroomList(){
+    var chatroomName = 'Test';
+
+    var chatroomElement = document.createElement('li');
+
+}
 
 function connect(event) {
     username = document.querySelector('#name').value.trim();

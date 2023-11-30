@@ -104,11 +104,6 @@ button.accent {
     color: #fff;
 }
 
-#chatroom-page {
-    position: relative;
-    height: 100%;
-}
-
 #username-page {
     text-align: center;
 }
@@ -149,6 +144,10 @@ button.accent {
     margin-top: 10px;
 }
 
+#chatroom-page {
+    position: relative;
+    height: 100%;
+}
 
 #chat-page {
     position: relative;
@@ -166,6 +165,78 @@ button.accent {
     max-height: 600px;
     position: relative;
 }
+
+/* 여기부터  */
+#chatroom-page ul {
+    list-style-type: none;
+    background-color: #FFF;
+    margin: 0;
+    overflow: auto;
+    overflow-y: scroll;
+    padding: 0 20px 0px 20px;
+    height: calc(100% - 150px);
+}
+
+#chatroom-page #messageForm {
+    padding: 20px;
+}
+
+#chatroom-page ul li {
+    line-height: 1.5rem;
+    padding: 10px 20px;
+    margin: 0;
+    border-bottom: 1px solid #f4f4f4;
+}
+
+#chatroom-page ul li p {
+    margin: 0;
+}
+
+#chatroom-page .event-message {
+    width: 100%;
+    text-align: center;
+    clear: both;
+}
+
+#chatroom-page .event-message p {
+    color: #777;
+    font-size: 14px;
+    word-wrap: break-word;
+}
+
+#chatroom-page .chat-message {
+    padding-left: 68px;
+    position: relative;
+}
+
+#chatroom-page .chat-message i {
+    position: absolute;
+    width: 42px;
+    height: 42px;
+    overflow: hidden;
+    left: 10px;
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 18px;
+    line-height: 42px;
+    color: #fff;
+    text-align: center;
+    border-radius: 50%;
+    font-style: normal;
+    text-transform: uppercase;
+}
+
+#chatroom-page .chat-message span {
+    color: #333;
+    font-weight: 600;
+}
+
+#chatroom-page .chat-message p {
+    color: #43464b;
+}
+/* 여기까지 */
+
+
 
 #chat-page ul {
     list-style-type: none;
