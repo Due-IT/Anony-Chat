@@ -104,6 +104,11 @@ button.accent {
     color: #fff;
 }
 
+#chatroom-page {
+    position: relative;
+    height: 100%;
+}
+
 #username-page {
     text-align: center;
 }
@@ -126,6 +131,18 @@ button.accent {
     right: 0;
     margin: 0 auto;
     margin-top: -160px;
+}
+
+.chatroom-container {
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #fff;
+    box-shadow: 0 1px 11px rgba(0, 0, 0, 0.27);
+    margin-top: 30px;
+    height: calc(100% - 60px);
+    max-height: 600px;
+    position: relative;
 }
 
 .username-page-container .username-submit {
@@ -253,6 +270,12 @@ button.accent {
 
 @media screen and (max-width: 730px) {
 
+    .chatroom-container {
+        margin-left: 10px;
+        margin-right: 10px;
+        margin-top: 10px;
+    }
+
     .chat-container {
         margin-left: 10px;
         margin-right: 10px;
@@ -261,6 +284,10 @@ button.accent {
 }
 
 @media screen and (max-width: 480px) {
+    .chatroom-container {
+        height: calc(100% - 30px);
+    }
+
     .chat-container {
         height: calc(100% - 30px);
     }
