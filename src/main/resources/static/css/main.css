@@ -177,62 +177,42 @@ button.accent {
     height: calc(100% - 150px);
 }
 
-#chatroom-page #messageForm {
-    padding: 20px;
+#chatroom-page ul li {
+    padding: 50px 20px;
+    margin: 0;
+    border-bottom: 1px solid #658998;
 }
 
-#chatroom-page ul li {
-    line-height: 1.5rem;
-    padding: 10px 20px;
-    margin: 0;
-    border-bottom: 1px solid #f4f4f4;
+#chatroom-page .chatroom {
+    height: 100px;
+    position: relative;
 }
 
 #chatroom-page ul li p {
     margin: 0;
 }
 
-#chatroom-page .event-message {
-    width: 100%;
-    text-align: center;
-    clear: both;
-}
-
-#chatroom-page .event-message p {
-    color: #777;
-    font-size: 14px;
-    word-wrap: break-word;
-}
-
-#chatroom-page .chat-message {
-    padding-left: 68px;
-    position: relative;
-}
-
-#chatroom-page .chat-message i {
+#chatroom-page .chatroom span {
     position: absolute;
-    width: 42px;
-    height: 42px;
+    width: 450px;
     overflow: hidden;
-    left: 10px;
+    left: 40px;
     display: inline-block;
     vertical-align: middle;
-    font-size: 18px;
-    line-height: 42px;
-    color: #fff;
-    text-align: center;
-    border-radius: 50%;
     font-style: normal;
-    text-transform: uppercase;
-}
-
-#chatroom-page .chat-message span {
-    color: #333;
+    color: #333333db;
     font-weight: 600;
+    font-size: 30px;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
-#chatroom-page .chat-message p {
+#chatroom-page .chatroom p {
     color: #43464b;
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
 }
 /* 여기까지 */
 

@@ -1,6 +1,7 @@
 'use strict';
 
 var chatroomPage = document.querySelector('#chatroom-page');
+var chatRoomList = document.querySelector('#chatroom-list');
 var usernamePage = document.querySelector('#username-page');
 var chatPage = document.querySelector('#chat-page');
 var usernameForm = document.querySelector('#usernameForm');
@@ -17,12 +18,26 @@ var colors = [
     '#ffc107', '#ff85af', '#FF9800', '#39bbb0'
 ];
 
-function getChatroomList(){
-    var chatroomName = 'Test';
-
+document.addEventListener("DOMContentLoaded", function() {
     var chatroomElement = document.createElement('li');
+    chatroomElement.classList.add('chatroom'); //스타일링을 위한것
 
-}
+    var roomnameElement = document.createElement('span');
+    var roonameText = document.createTextNode('Test');
+    roomnameElement.appendChild(roonameText);
+
+    var userCountElement = document.createElement('p');
+    var userCountText = document.createTextNode('현재 인원 : 50명');
+    userCountElement.appendChild(userCountText);
+
+    chatroomElement.appendChild(roomnameElement);
+    chatroomElement.appendChild(userCountElement);
+
+    //chatroom-list에 추가
+    chatRoomList.appendChild(chatroomElement);
+
+    chatroomPage.scrollTop=chatroomPage.scrollHeight;
+});
 
 function connect(event) {
     username = document.querySelector('#name').value.trim();
