@@ -3,7 +3,6 @@
 
 var chatRoomPage = document.querySelector('#chatroom-page');
 var chatRoomList = document.querySelector('#chatroom-list');
-var listItems = document.querySelectorAll('#chatroom-list');
 var chatRoomForm = document.querySelector('#chatroom-name-form');
 var roomnameInput = document.querySelector('#roomname');
 var usernamePage = document.querySelector('#username-page');
@@ -42,6 +41,7 @@ function introPage(event) {
                 var chatRoomElement = document.createElement('li');
                 chatRoomElement.classList.add('chatroom');
                 chatRoomElement.setAttribute('roomId', item.roomId);
+                chatRoomElement.setAttribute('onclick', 'chatRoomClick(this)');
 
                 var roomnameElement = document.createElement('span');
                 var roonameText = document.createTextNode(item.roomName);
@@ -61,15 +61,25 @@ function introPage(event) {
         });
 };
 
-function enterChatRoom(event, item){
+function chatRoomClick(room){
     chatRoomPage.classList.add('hidden');
     usernamePage.classList.remove('hidden');
 
-    var room = item.querySelector('.chatroom');
-    console.log(room);
-    localStorage.setItem('roomId', room.getAttribute('roomId'));
+    var roomId = room.getAttribute('roomId');
 
-    event.preventDefault();
+    var url = "http://localhost:8080/roomname?roomId="+roomId;
+    fetch(url)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.text();
+        })
+        .then(data => {
+            localStorage.setItem('roomName', data);
+        });
+
+    localStorage.setItem('roomId', roomId);
 }
 
 function createChatRoom(event){
@@ -91,6 +101,7 @@ function createChatRoom(event){
             usernamePage.classList.remove('hidden');
 
             localStorage.setItem('roomId', data.roomId);
+            localStorage.setItem('roomName', data.roomName);
         });
     event.preventDefault(); //페이지가 다시 로드 되는 것을 막는다.
 }
@@ -114,6 +125,11 @@ function connect(event) {
 function onConnected() {
     //localstorage에서 아이템 꺼내기
     var roomId = localStorage.getItem('roomId');
+    var roomName = localStorage.getItem('roomName');
+
+    var roomnameElement = document.querySelector('#chat-page .chat-header h2');
+    roomnameElement.innerText = roomName;
+
 
     // Subscribe to the Public Topic
     stompClient.subscribe('/topic/public/'+roomId, onMessageReceived);
@@ -123,6 +139,8 @@ function onConnected() {
         {},
         JSON.stringify({sender: username, type: 'JOIN', roomId: roomId})
     )
+
+    //GET으로 roomName들고 오기
 
     connectingElement.classList.add('hidden');
 }
@@ -217,6 +235,3 @@ chatRoomForm.addEventListener('submit', createChatRoom, true)
 usernameForm.addEventListener('submit', connect, true)
 messageForm.addEventListener('submit', sendMessage, true)
 exitButton.addEventListener('click', exitChatRoom, true);
-listItems.forEach(function(item) {
-    item.addEventListener('click', (event) => enterChatRoom(event, item), true);
-});

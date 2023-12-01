@@ -12,10 +12,7 @@ import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
 import org.springframework.messaging.simp.SimpMessageSendingOperations;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -59,6 +56,13 @@ public class ChatController {
         List<ChatRoom> chatRooms = chatRoomRepository.getChatRoomList();
 
         return new ResponseEntity<>(chatRooms, HttpStatus.OK);
+    }
+
+    @ResponseBody
+    @GetMapping("/roomname")
+    public ResponseEntity<String> getRoomName(@RequestParam String roomId){
+        String roomName = chatRoomRepository.getRoomName(roomId);
+        return new ResponseEntity<>(roomName, HttpStatus.OK);
     }
 
     @PostMapping("/chatroom")

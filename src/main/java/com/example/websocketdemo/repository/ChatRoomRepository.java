@@ -3,10 +3,7 @@ package com.example.websocketdemo.repository;
 import com.example.websocketdemo.model.ChatRoom;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 @Repository
 public class ChatRoomRepository {
@@ -58,5 +55,14 @@ public class ChatRoomRepository {
         ChatRoom chatRoom = ChatRoom.create(roomName);
         chatRooms.add(chatRoom);
         return chatRoom;
+    }
+
+    public String getRoomName(String roomId) {
+        ChatRoom chatRoom = chatRooms.stream()
+                .filter(room -> room.getRoomId().equals(roomId))
+                .findFirst()
+                .orElseThrow(() -> new RuntimeException("No Room"));
+
+        return chatRoom.getRoomName();
     }
 }
