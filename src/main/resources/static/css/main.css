@@ -167,6 +167,10 @@ button.accent {
 }
 
 /* 여기부터  */
+.form-control {
+    display: inline-block;
+}
+
 #chatroom-page ul {
     list-style-type: none;
     background-color: #FFF;
@@ -213,6 +217,29 @@ button.accent {
     right: 15px;
     top: 50%;
     transform: translateY(-50%);
+}
+
+#chatroom-page .chatroom-form-control {
+    display: inline-block;
+    width: 500px;
+    height: 38px;
+}
+
+#chatroom-page .chatroom-form-group {
+    display: inline-block;
+    width: 500px;
+    height: 38px;
+    margin: 10px;
+}
+
+#chatroom-page .chatroom-submit {
+    position: absolute;
+    display: inline-block;
+    width: 120px;
+    height: 38px;
+    margin: 10px;
+    text-align: right;
+    right: 10px;
 }
 /* 여기까지 */
 

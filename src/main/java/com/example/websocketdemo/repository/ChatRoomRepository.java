@@ -47,7 +47,7 @@ public class ChatRoomRepository {
         }
     }
 
-    public ChatRoom createChatroom(String roomName){
+    public ChatRoom createChatRoom(String roomName){
         ChatRoom chatRoom = ChatRoom.create(roomName);
         chatRooms.add(chatRoom);
         return chatRoom;
