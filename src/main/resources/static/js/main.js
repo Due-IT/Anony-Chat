@@ -1,7 +1,9 @@
 'use strict';
 
-var chatroomPage = document.querySelector('#chatroom-page');
+var chatRoomPage = document.querySelector('#chatroom-page');
 var chatRoomList = document.querySelector('#chatroom-list');
+var chatRoomForm = document.querySelector('#chatroom-name-form');
+var roomnameInput = document.querySelector('#roomname');
 var usernamePage = document.querySelector('#username-page');
 var chatPage = document.querySelector('#chat-page');
 var usernameForm = document.querySelector('#usernameForm');
@@ -32,8 +34,8 @@ document.addEventListener("DOMContentLoaded", function() {
             console.log(data);
 
             data.forEach(item => {
-                var chatroomElement = document.createElement('li');
-                chatroomElement.classList.add('chatroom');
+                var chatRoomElement = document.createElement('li');
+                chatRoomElement.classList.add('chatroom');
 
                 var roomnameElement = document.createElement('span');
                 var roonameText = document.createTextNode(item.roomName);
@@ -43,15 +45,38 @@ document.addEventListener("DOMContentLoaded", function() {
                 var userCountText = document.createTextNode('현재 인원 : '+item.userCount+'명');
                 userCountElement.appendChild(userCountText);
 
-                chatroomElement.appendChild(roomnameElement);
-                chatroomElement.appendChild(userCountElement);
+                chatRoomElement.appendChild(roomnameElement);
+                chatRoomElement.appendChild(userCountElement);
 
-                chatRoomList.appendChild(chatroomElement);
+                chatRoomList.appendChild(chatRoomElement);
 
-                chatroomPage.scrollTop=chatroomPage.scrollHeight;
+                chatRoomPage.scrollTop=chatRoomPage.scrollHeight;
             });
         });
 });
+
+function createChatRoom(event){
+    var nameText = roomnameInput.value.trim();
+
+    var url = "http://localhost:8080/chatroom"
+    fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-type' : 'application/json'
+        },
+        body: nameText
+    })
+        .then(response =>{
+            return response.json();
+        })
+        .then(data => {
+            chatRoomPage.classList.add('hidden');
+            usernamePage.classList.remove('hidden');
+
+            localStorage.setItem('roomId', data.roomId);
+        });
+    event.preventDefault(); //페이지가 다시 로드 되는 것을 막는다.
+}
 
 function connect(event) {
     username = document.querySelector('#name').value.trim();
@@ -154,5 +179,6 @@ function getAvatarColor(messageSender) {
     return colors[index];
 }
 
+chatRoomForm.addEventListener('submit', createChatRoom, true)
 usernameForm.addEventListener('submit', connect, true)
 messageForm.addEventListener('submit', sendMessage, true)

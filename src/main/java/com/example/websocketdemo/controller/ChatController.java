@@ -58,16 +58,13 @@ public class ChatController {
 
     @GetMapping("/chatrooms")
     public ResponseEntity<List<ChatRoom>> getChatRoomList(){
-        chatRoomRepository.createChatRoom("Test1");
-        chatRoomRepository.createChatRoom("Test2");
-
         List<ChatRoom> chatRooms = chatRoomRepository.getChatRoomList();
 
         return new ResponseEntity<>(chatRooms, HttpStatus.OK);
     }
 
-    @PostMapping("/chatrooms")
-    public ResponseEntity<ChatRoom> createChatRoom(@RequestParam String roomName){
+    @PostMapping("/chatroom")
+    public ResponseEntity<ChatRoom> createChatRoom(@RequestBody String roomName){
         ChatRoom chatroom = chatRoomRepository.createChatRoom(roomName);
         return new ResponseEntity<>(chatroom, HttpStatus.OK);
     }
