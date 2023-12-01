@@ -3,6 +3,7 @@ package com.example.websocketdemo.model;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -17,8 +18,9 @@ public class ChatRoom {
 
     public static ChatRoom create(String roomName){
         ChatRoom chatRoom = new ChatRoom();
-        chatRoom.roomId = UUID.randomUUID().toString();
-        chatRoom.roomName = roomName;
+        chatRoom.setRoomId(UUID.randomUUID().toString());
+        chatRoom.setRoomName(roomName);
+        chatRoom.setUsers(new ArrayList<>());
 
         return chatRoom;
     }

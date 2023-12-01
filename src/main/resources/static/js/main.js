@@ -95,13 +95,16 @@ function connect(event) {
 
 
 function onConnected() {
+    //localstorage에서 아이템 꺼내기
+    var roomId = localStorage.getItem('roomId');
+
     // Subscribe to the Public Topic
-    stompClient.subscribe('/topic/public', onMessageReceived);
+    stompClient.subscribe('/topic/public'+roomId, onMessageReceived);
 
     // Tell your username to the server
     stompClient.send("/app/chat.addUser",
         {},
-        JSON.stringify({sender: username, type: 'JOIN'})
+        JSON.stringify({sender: username, type: 'JOIN', roomId: roomId})
     )
 
     connectingElement.classList.add('hidden');
@@ -116,12 +119,14 @@ function onError(error) {
 
 function sendMessage(event) {
     var messageContent = messageInput.value.trim();
+    var roomId = localStorage.getItem('roomId');
 
     if(messageContent && stompClient) {
         var chatMessage = {
             sender: username,
             content: messageInput.value,
-            type: 'CHAT'
+            type: 'CHAT',
+            roomId: roomId
         };
 
         stompClient.send("/app/chat.sendMessage", {}, JSON.stringify(chatMessage));

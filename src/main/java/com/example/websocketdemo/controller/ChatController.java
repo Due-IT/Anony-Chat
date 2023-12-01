@@ -28,7 +28,7 @@ public class ChatController {
 
     @MessageMapping("/chat.sendMessage")
     public ChatMessage sendMessage(@Payload ChatMessage chatMessage) {
-        String destination = "/topic/chat/room/"+chatMessage.getRoomId();
+        String destination = "/topic/public/"+chatMessage.getRoomId();
 
         chatMessage.setContent(chatMessage.getContent());
         messagingTemplate.convertAndSend(destination, chatMessage);
@@ -51,7 +51,7 @@ public class ChatController {
         response.setSender(sender);
         response.setContent(sender + " 님이 입장하셨습니다.");
         response.setRoomId(chatMessage.getRoomId());
-        messagingTemplate.convertAndSend("/topic/room/" + chatMessage.getRoomId(), response);
+        messagingTemplate.convertAndSend("/topic/public/" + chatMessage.getRoomId(), response);
 
         return response;
     }
