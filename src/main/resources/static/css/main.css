@@ -264,6 +264,16 @@ button.accent {
     padding: 20px;
 }
 
+#chat-page .exit-chat-room{
+    position: absolute;
+    margin-left: 30px;
+    color: #333;
+    background: #FFFFFF;
+    font-size: 30px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
 #chat-page ul li {
     line-height: 1.5rem;
     padding: 10px 20px;
@@ -331,7 +341,8 @@ button.accent {
 }
 
 .chat-header {
-    text-align: center;
+    position: relative;
+    height: 70px;
     padding: 15px;
     border-bottom: 1px solid #ececec;
 }
@@ -339,6 +350,7 @@ button.accent {
 .chat-header h2 {
     margin: 0;
     font-weight: 500;
+    text-align: center;
 }
 
 .connecting {

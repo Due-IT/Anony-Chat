@@ -47,7 +47,7 @@ public class WebSocketEventListener {
 
             chatRoomRepository.deleteUser(username, roomId);
 
-            messagingTemplate.convertAndSend("/topic/room/"+roomId, chatMessage);
+            messagingTemplate.convertAndSend("/topic/public/"+roomId, chatMessage);
         }
     }
 }

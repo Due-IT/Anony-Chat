@@ -1,11 +1,14 @@
 'use strict';
 
+
 var chatRoomPage = document.querySelector('#chatroom-page');
 var chatRoomList = document.querySelector('#chatroom-list');
+var listItems = document.querySelectorAll('#chatroom-list');
 var chatRoomForm = document.querySelector('#chatroom-name-form');
 var roomnameInput = document.querySelector('#roomname');
 var usernamePage = document.querySelector('#username-page');
 var chatPage = document.querySelector('#chat-page');
+var exitButton = document.querySelector('#exit-chat-room');
 var usernameForm = document.querySelector('#usernameForm');
 var messageForm = document.querySelector('#messageForm');
 var messageInput = document.querySelector('#message');
@@ -20,7 +23,9 @@ var colors = [
     '#ffc107', '#ff85af', '#FF9800', '#39bbb0'
 ];
 
-document.addEventListener("DOMContentLoaded", function() {
+
+
+function introPage(event) {
     //데이터 받아오기
     var url = "http://localhost:8080/chatrooms";
     fetch(url)
@@ -36,6 +41,7 @@ document.addEventListener("DOMContentLoaded", function() {
             data.forEach(item => {
                 var chatRoomElement = document.createElement('li');
                 chatRoomElement.classList.add('chatroom');
+                chatRoomElement.setAttribute('roomId', item.roomId);
 
                 var roomnameElement = document.createElement('span');
                 var roonameText = document.createTextNode(item.roomName);
@@ -53,7 +59,18 @@ document.addEventListener("DOMContentLoaded", function() {
                 chatRoomPage.scrollTop=chatRoomPage.scrollHeight;
             });
         });
-});
+};
+
+function enterChatRoom(event, item){
+    chatRoomPage.classList.add('hidden');
+    usernamePage.classList.remove('hidden');
+
+    var room = item.querySelector('.chatroom');
+    console.log(room);
+    localStorage.setItem('roomId', room.getAttribute('roomId'));
+
+    event.preventDefault();
+}
 
 function createChatRoom(event){
     var nameText = roomnameInput.value.trim();
@@ -108,6 +125,16 @@ function onConnected() {
     )
 
     connectingElement.classList.add('hidden');
+}
+
+function exitChatRoom(event){
+    stompClient.unsubscribe();
+    localStorage.removeItem('roomId');
+
+    chatPage.classList.add('hidden');
+    chatRoomPage.classList.remove('hidden');
+
+    location.reload();
 }
 
 
@@ -184,6 +211,12 @@ function getAvatarColor(messageSender) {
     return colors[index];
 }
 
+
+document.addEventListener("DOMContentLoaded", introPage,true);
 chatRoomForm.addEventListener('submit', createChatRoom, true)
 usernameForm.addEventListener('submit', connect, true)
 messageForm.addEventListener('submit', sendMessage, true)
+exitButton.addEventListener('click', exitChatRoom, true);
+listItems.forEach(function(item) {
+    item.addEventListener('click', (event) => enterChatRoom(event, item), true);
+});

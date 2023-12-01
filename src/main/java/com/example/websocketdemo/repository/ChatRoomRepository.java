@@ -36,7 +36,14 @@ public class ChatRoomRepository {
     }
 
     public void deleteUser(String username, String roomId) {
-        List<String> chatRoomUsers = getChatRoom(roomId).getUsers();
+        ChatRoom chatRoom = getChatRoom(roomId);
+
+        List<String> chatRoomUsers = chatRoom.getUsers();
+        chatRoom.setUserCount(chatRoom.getUserCount()-1);
+
+        if(chatRoom.getUserCount()==0){
+//            chatRooms.remove(chatRoom);
+        }
 
         Iterator<String> iterator = chatRoomUsers.iterator();
         while (iterator.hasNext()) {
