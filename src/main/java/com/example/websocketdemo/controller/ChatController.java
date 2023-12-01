@@ -4,6 +4,8 @@ import com.example.websocketdemo.model.ChatMessage;
 import com.example.websocketdemo.model.ChatRoom;
 import com.example.websocketdemo.repository.ChatRoomRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.handler.annotation.SendTo;
@@ -11,6 +13,9 @@ import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
 import org.springframework.messaging.simp.SimpMessageSendingOperations;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -52,8 +57,20 @@ public class ChatController {
     }
 
     @GetMapping("/chatrooms")
-    public List<ChatRoom> getChatRoomList(){
+    public ResponseEntity<List<ChatRoom>> getChatRoomList(){
         List<ChatRoom> chatRooms = chatRoomRepository.getChatRoomList();
-        return chatRooms;
+
+        ChatRoom chatRoom1 = ChatRoom.create("Test1");
+        ChatRoom chatRoom2 = ChatRoom.create("Test2");
+        chatRooms.add(chatRoom1);
+        chatRooms.add(chatRoom2);
+
+        return new ResponseEntity<>(chatRooms, HttpStatus.OK);
+    }
+
+    @PostMapping("/chatrooms")
+    public ResponseEntity<ChatRoom> createChatRoom(@RequestParam String roomName){
+        ChatRoom chatroom = chatRoomRepository.createChatroom(roomName);
+        return new ResponseEntity<>(chatroom, HttpStatus.OK);
     }
 }

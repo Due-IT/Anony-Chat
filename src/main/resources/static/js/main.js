@@ -19,24 +19,38 @@ var colors = [
 ];
 
 document.addEventListener("DOMContentLoaded", function() {
-    var chatroomElement = document.createElement('li');
-    chatroomElement.classList.add('chatroom'); //스타일링을 위한것
+    //데이터 받아오기
+    var url = "http://localhost:8080/chatrooms";
+    fetch(url)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log(data);
 
-    var roomnameElement = document.createElement('span');
-    var roonameText = document.createTextNode('Test');
-    roomnameElement.appendChild(roonameText);
+            data.forEach(item => {
+                var chatroomElement = document.createElement('li');
+                chatroomElement.classList.add('chatroom');
 
-    var userCountElement = document.createElement('p');
-    var userCountText = document.createTextNode('현재 인원 : 50명');
-    userCountElement.appendChild(userCountText);
+                var roomnameElement = document.createElement('span');
+                var roonameText = document.createTextNode(item.roomName);
+                roomnameElement.appendChild(roonameText);
 
-    chatroomElement.appendChild(roomnameElement);
-    chatroomElement.appendChild(userCountElement);
+                var userCountElement = document.createElement('p');
+                var userCountText = document.createTextNode('현재 인원 : '+item.userCount+'명');
+                userCountElement.appendChild(userCountText);
 
-    //chatroom-list에 추가
-    chatRoomList.appendChild(chatroomElement);
+                chatroomElement.appendChild(roomnameElement);
+                chatroomElement.appendChild(userCountElement);
 
-    chatroomPage.scrollTop=chatroomPage.scrollHeight;
+                chatRoomList.appendChild(chatroomElement);
+
+                chatroomPage.scrollTop=chatroomPage.scrollHeight;
+            });
+        });
 });
 
 function connect(event) {

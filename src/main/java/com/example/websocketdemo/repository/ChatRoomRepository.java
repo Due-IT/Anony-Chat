@@ -46,4 +46,10 @@ public class ChatRoomRepository {
             }
         }
     }
+
+    public ChatRoom createChatroom(String roomName){
+        ChatRoom chatRoom = ChatRoom.create(roomName);
+        chatRooms.add(chatRoom);
+        return chatRoom;
+    }
 }
