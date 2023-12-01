@@ -30,9 +30,7 @@ public class ChatController {
     public ChatMessage sendMessage(@Payload ChatMessage chatMessage) {
         String destination = "/topic/public/"+chatMessage.getRoomId();
 
-        chatMessage.setContent(chatMessage.getContent());
         messagingTemplate.convertAndSend(destination, chatMessage);
-
         return chatMessage;
     }
 

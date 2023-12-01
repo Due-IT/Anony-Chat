@@ -99,7 +99,7 @@ function onConnected() {
     var roomId = localStorage.getItem('roomId');
 
     // Subscribe to the Public Topic
-    stompClient.subscribe('/topic/public'+roomId, onMessageReceived);
+    stompClient.subscribe('/topic/public/'+roomId, onMessageReceived);
 
     // Tell your username to the server
     stompClient.send("/app/chat.addUser",
