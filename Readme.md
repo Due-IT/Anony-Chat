@@ -1,26 +1,32 @@
-## Spring Boot WebSocket Chat Appplication
+## SpringBoot WebSocket Chatroom Application
 
-You can checkout the live version of the application at https://spring-ws-chat.herokuapp.com/
+### 소개
 
-![App Screenshot](screenshot.png)
+스프링을 사용해 구현한 웹소켓 채팅 앱입니다.
 
-## Requirements
+### 기능
+
+여러개의 채팅방을 확인하고, 매 채팅방마다 닉네임을 설정하여 채팅에 참여할 수 있습니다!
+
+### 환경
 
 1. Java - 11
 
 2. Maven - 3.x.x
 
-## Steps to Setup
+3. Spring boot - 2.5.5
+
+### 실행방법
 
 **1. Clone the application**
 
-```bash
+```gradle
 git clone https://github.com/callicoder/spring-boot-websocket-chat-demo.git
 ```
 
 **2. Build and run the app using maven**
 
-```bash
+```gradle
 cd spring-boot-websocket-chat-demo
 mvn package
 java -jar target/websocket-demo-0.0.1-SNAPSHOT.jar
@@ -28,12 +34,6 @@ java -jar target/websocket-demo-0.0.1-SNAPSHOT.jar
 
 Alternatively, you can run the app directly without packaging it like so -
 
-```bash
+```gradle
 mvn spring-boot:run
 ```
-
-## Learn More
-
-You can find the tutorial for this application on my blog -
-
-https://www.callicoder.com/spring-boot-websocket-chat-example/
