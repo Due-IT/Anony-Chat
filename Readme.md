@@ -24,7 +24,7 @@
 **1. Clone the application**
 
 ```gradle
-git clone https://github.com/callicoder/spring-boot-websocket-chat-demo.git
+git clone https://github.com/FhRh/Spring_Socket_Chat.git
 ```
 
 **2. Build and run the app using maven**
