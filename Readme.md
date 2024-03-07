@@ -44,7 +44,7 @@ mvn spring-boot:run
 
 ### 참고 사항
 
-만약 채팅방으로 구성된 앱을 확인하고 싶다면 feature/AddChatroom 브랜치를 확인해주세요!
+만약 채팅방을 추가적으로 구현한 앱을 확인하고 싶다면 feature/AddChatroom 브랜치를 확인해주세요!
 
 
 ### 원본 출처 
@@ -54,3 +54,4 @@ https://github.com/callicoder/spring-boot-websocket-chat-demo
 ```
 
 추가적으로 구현된 기능은 feature/AddChatroom을 확인해주세요
+대략 500줄 가량의 추가/수정 사항이 있습니다.
