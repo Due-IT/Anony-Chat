@@ -14,7 +14,7 @@
 
 1. Java - 11
 
-2. Maven - 3.x.x
+2. Maven - 4.0.0.xsd
 
 3. Spring boot - 2.5.5
    
